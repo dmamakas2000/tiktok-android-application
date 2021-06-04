@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="gr.aueb.cs.tiktokapplication.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="gr.aueb.cs.tiktokapplication.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="gr.aueb.cs.tiktokapplication.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_add_hashtag"
+        android:name="gr.aueb.cs.tiktokapplication.ui.addhashtag.add_hashtag"
+        android:label="@string/menu_add_hashtag"
+        tools:layout="@layout/fragment_add_hashtag" />
+
+    <fragment
+        android:id="@+id/nav_remove_hashtag"
+        android:name="gr.aueb.cs.tiktokapplication.ui.removehashtag.RemoveHashtag"
+        android:label="@string/menu_remove_hashtag"
+        tools:layout="@layout/fragment_remove_hashtag" />
+
+    <fragment
+        android:id="@+id/nav_upload"
+        android:name="gr.aueb.cs.tiktokapplication.ui.upload.Upload"
+        android:label="@string/menu_upload"
+        tools:layout="@layout/fragment_upload" />
+
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="gr.aueb.cs.tiktokapplication.ui.register.Register"
+        android:label="@string/menu_register"
+        tools:layout="@layout/fragment_register" />
+
+    <fragment
+        android:id="@+id/nav_disconnect"
+        android:name="gr.aueb.cs.tiktokapplication.ui.disconnect.Disconnect"
+        android:label="@string/menu_disconnect"
+        tools:layout="@layout/fragment_disconnect" />
+
+    <fragment
+        android:id="@+id/nav_play"
+        android:name="gr.aueb.cs.tiktokapplication.ui.play.Play"
+        android:label="@string/menu_play"
+        tools:layout="@layout/fragment_play" />
+
+    <fragment
+        android:id="@+id/nav_capture"
+        android:name="gr.aueb.cs.tiktokapplication.ui.capture.Capture"
+        android:label="@string/menu_capture"
+        tools:layout="@layout/fragment_capture" />
+
+</navigation>
