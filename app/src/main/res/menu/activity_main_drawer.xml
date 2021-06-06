@@ -35,12 +35,7 @@
             android:id="@+id/nav_add_hashtag"
             android:icon="@drawable/ic_baseline_add_circle_24"
             android:title="@string/menu_add_hashtag" />
-
-        <item
-            android:id="@+id/nav_upload"
-            android:icon="@drawable/ic_baseline_cloud_upload_24"
-            android:title="@string/menu_upload" />
-
+        
         <item
             android:id="@+id/nav_register"
             android:icon="@drawable/ic_baseline_how_to_reg_24"

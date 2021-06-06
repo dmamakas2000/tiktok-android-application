@@ -6,9 +6,16 @@
     <uses-permission
         android:name="android.permission.INTERNET"
         tools:ignore="ManifestOrder" />
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -16,10 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TikTokApplication">
+        <activity android:name=".Video"></activity>
+        <activity android:name=".Configurations" />
         <activity
             android:name=".MainMenu"
             android:label="@string/title_activity_main_menu"
-            android:theme="@style/Theme.TikTokApplication.NoActionBar"></activity>
+            android:theme="@style/Theme.TikTokApplication.NoActionBar" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

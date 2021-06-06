@@ -1,16 +1,19 @@
 package gr.aueb.cs.tiktokapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-
+import android.widget.Toast;
+import java.util.ArrayList;
 import java.util.Objects;
+
+import gr.aueb.cs.tiktokapplication.appnode.Publisher;
+import gr.aueb.cs.tiktokapplication.video.ChannelName;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -30,8 +33,26 @@ public class SignUpActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainMenu.class);
-                view.getContext().startActivity(intent);
+
+                EditText c = (EditText) findViewById(R.id.channelName);
+
+                String channelName = c.getText().toString().trim();
+
+                System.out.println(channelName);
+
+                if (channelName.equals("")) {
+                    // Display error message
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please provide a channel name!",  Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+
+                    Intent intent = new Intent(view.getContext(), Configurations.class);
+
+                    intent.putExtra("CHANNEL_NAME", channelName);
+
+                    view.getContext().startActivity(intent);
+                }
+
             }
 
         });

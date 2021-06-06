@@ -219,38 +219,24 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 
 	public void retrieveInformation() {
 		try {
-			
-			// Getting current working directory
-			String userDirectory = System.getProperty("user.dir");
 
-			assert userDirectory != null;
-			File directory= new File(userDirectory);
-			for (File file : Objects.requireNonNull(directory.listFiles())) {
-				
-				if (file.getName().endsWith(".txt")) {
-					
-					Scanner myReader = new Scanner(file);
-					
-					while (myReader.hasNextLine()) {
-					        String data = myReader.nextLine();
-					        
-					        String[] splited = data.split("\\s+");
-					        
-					        					        			        
-					        String ipadrress = splited[0];
-					        int port = Integer.parseInt(splited[1]);
-					        			        
-					        
-					        Message message = new Message(ipadrress, port);
-					        
-					        this.brokers.add(message);
-					   }
-					   
-					   myReader.close();
-					   				   
-				}			   
-			}
-						   
+			String ipB1 = "192.168.1.200";
+			String ipB2 = "192.168.1.200";
+			String ipB3 = "192.168.1.200";
+			int pB1 = 3030;
+			int pB2 = 4040;
+			int pB3 = 5050;
+
+
+			Message b1 = new Message(ipB1, pB1);
+			Message b2 = new Message(ipB2, pB2);
+			Message b3 = new Message(ipB3, pB3);
+
+			this.brokers.add(b1);
+			this.brokers.add(b2);
+			this.brokers.add(b3);
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -287,6 +273,7 @@ public class Publisher extends Thread implements Node, PublisherInterface {
                 this.channelname.getHashtagsPublished().remove(hashtag);
         		this.getHashtagsToBeDeleted().add(hashtag); // Adding the hash-tag to the queue to be deleted from broker later on
                 this.notifyBrokersForHashTags("remove" , hashtag);
+                this.updateNodes();
             }
             
         }
