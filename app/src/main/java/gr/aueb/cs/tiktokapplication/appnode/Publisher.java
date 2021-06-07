@@ -1,10 +1,14 @@
 package gr.aueb.cs.tiktokapplication.appnode;
 
+import android.database.Cursor;
+import android.net.Uri;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -33,7 +37,10 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 	private int port;             // Publisher's port
 	private PrintWriter out;      // Publisher's output stream
 	private BufferedReader in;    // Publisher's input stream
-	
+
+	private static InputStream androidVideoInputStream;
+	private static long androidVideoBytes;
+
 	private ThreadInformation option;
 	
 	private ArrayList<String> hashtagsToBeDeleted = new ArrayList<String>(); // Hash-tags to be deleted are stored there temporarily
@@ -91,7 +98,15 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 	public ThreadInformation getOption() {
 		return this.option;
 	}
-	
+
+	public InputStream getAndroidVideoInputStream() {
+		return androidVideoInputStream;
+	}
+
+	public long getAndroidVideoBytes() {
+		return androidVideoBytes;
+	}
+
 	// --------------------------- Setters ---------------------------
 	
 	public void setChannelname(ChannelName channelname) {
@@ -133,6 +148,15 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 	public void setOption(ThreadInformation newOption) {
 		this.option = newOption;
 	}
+
+	public void setAndroidVideoInputStream(InputStream newInputStream) {
+		androidVideoInputStream = newInputStream;
+	}
+
+	public void setAndroidVideoBytes(long newBytes) {
+		androidVideoBytes = newBytes;
+	}
+
 	// --------------------------- Node's Methods ---------------------------
 	
 	public void init(int nodeNumber, String ipAdress, int portNumber, ChannelName channel) {
@@ -416,7 +440,10 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 			// Fourth space 
 			broker = indexes[1];
 		}
-		
+
+		System.out.println(this.getBrokers().get(broker-1).getIpAddres());
+		System.out.println(this.getBrokers().get(broker-1).getPort());
+
 		// Finally, return the desired broker
 		return this.getBrokers().get(broker-1);
 	}
@@ -494,7 +521,7 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 		
 	}
 
-	/*
+
 	public ArrayList<Value> generateChunks(String video) {
 	
 		ArrayList<Value> chunks = new ArrayList<Value>();
@@ -502,23 +529,25 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 		
 		// Step 1: Convert video file into a byte array
 		
-		File file = new File(video);
-		int size = (int) file.length();
-		byte[] bytes = new byte[size]; // byte array
-		
-		
+		//File file = new File(video);
+		//int size = (int) file.length();
+		//byte[] bytes = new byte[size]; // byte array
+
+		byte[] bytes = new byte[(int) androidVideoBytes]; // byte array
 		
 		try {
-			BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
-			buf.read(bytes, 0, bytes.length);
-			buf.close();
-			
+			//BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+			//buf.read(bytes, 0, bytes.length);
+			//buf.close();
+
+			androidVideoInputStream.read(bytes, 0, (int) androidVideoBytes);
 			
 			// Step 2: Create chunks
 			
 			// Each chunk is going to contain 12 KB of data
 			
 			// Detecting the file type
+			/*
 		    BodyContentHandler handler = new BodyContentHandler();
 		    Metadata metadata = new Metadata();
 		    FileInputStream inputstream = new FileInputStream(new File(video));
@@ -527,7 +556,7 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 		    // Parser 
 		    MP4Parser MP4Parser = new MP4Parser();
 		    MP4Parser.parse(inputstream, handler, metadata, pcontext);
-	
+			*/
 		    // File size in bytes  
 			int file_size = bytes.length;
 			
@@ -543,11 +572,17 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 					
 					String videoName = i + "_" + video;
 					String channelname = this.getChannelname().getChannelName();
-					String dateCreated = metadata.get("creation_date");
-					String length =  metadata.get("image_length");
+					//String dateCreated = metadata.get("creation_date");
+					//String length =  metadata.get("image_length");
+					//String frameRate = "";
+					//String frameWidth = metadata.get("image_width");
+					//String frameHeight = metadata.get("image_height");
+					String dateCreated = "";
+					String length =  "";
 					String frameRate = "";
-					String frameWidth = metadata.get("image_width");
-					String frameHeight = metadata.get("image_height");
+					String frameWidth = "";
+					String frameHeight ="";
+
 					ArrayList<String> associatedHashtags = this.getChannelname().getHashtagsPublished();
 					
 					byte[] videoFileChunk = new byte[12288];
@@ -571,11 +606,15 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 					
 					String videoName = i + "_" + video;
 					String channelname = this.getChannelname().getChannelName();
-					String dateCreated = metadata.get("creation_date");
-					String length =  metadata.get("image_length");
+					//String dateCreated = metadata.get("creation_date");
+					//String length =  metadata.get("image_length");
+					//String frameRate = "";
+					//String frameWidth = metadata.get("image_width");
+					String dateCreated = "";
+					String length =  "";
 					String frameRate = "";
-					String frameWidth = metadata.get("image_width");
-					String frameHeight = "";
+					String frameWidth = "";
+					String frameHeight ="";
 					ArrayList<String> associatedHashtags = this.getChannelname().getHashtagsPublished();
 					
 					byte[] videoFileChunk = new byte[12288];
@@ -607,14 +646,10 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 			
 		} catch (Exception e) {
 			System.err.println("Couldn't convert video into chunks ");
+			e.printStackTrace();
 		}
 		
 		return chunks;
-	}
-	*/
-
-	public ArrayList<Value> generateChunks(String video) {
-		return null;
 	}
 
 	public void run() {
