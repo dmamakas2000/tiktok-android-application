@@ -336,7 +336,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 		this.connect(brokerToRegister.getIpAddres(), brokerToRegister.getPort());
 		
 		try {
-			
+			Thread.sleep(5000);
 			OutputStream os = this.getSocket().getOutputStream();
 	        ObjectOutputStream oos = new ObjectOutputStream(os);
 	        oos.writeObject("Register");
@@ -346,7 +346,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 	        m.setKey(key);
 	        oos.writeObject(m);
 	        
-	        this.disconnect();
+	        // this.disconnect();
 	        
 	        
 		} catch (Exception e) {
@@ -363,7 +363,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 		this.connect(brokerToRegister.getIpAddres(), brokerToRegister.getPort());
 		
 		try {
-			
+			Thread.sleep(5000);
 			OutputStream os = this.getSocket().getOutputStream();
 	        ObjectOutputStream oos = new ObjectOutputStream(os);
 	        oos.writeObject("Disconnect");
@@ -377,7 +377,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 			e.printStackTrace();
 		}
 		
-		this.disconnect();
+		// this.disconnect();
 		
 	}
 

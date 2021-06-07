@@ -73,7 +73,7 @@ public class Configurations extends AppCompatActivity {
 
                 // Initialize a new Consumer object
                 Consumer consumer = new Consumer();
-                consumer.init(2, ipSub, portSub);
+                consumer.init(2, ipPub, portPub);
 
                 // Add Consumer on existing database
                 ConsumerDAO daoConsumer = new ConsumerDAO(consumer);
