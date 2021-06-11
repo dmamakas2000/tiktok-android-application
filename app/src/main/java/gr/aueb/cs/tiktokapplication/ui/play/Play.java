@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -51,9 +52,6 @@ public class Play extends Fragment {
                 String key = keyToPlay.getText().toString().trim();
 
                 if (!key.equals("")) {
-                    // Play the video
-                    //String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-
                     ContextWrapper contextWrapper = new ContextWrapper(getActivity().getApplicationContext());
                     File dir = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
                     File file = new File(dir, "tiktokvideo" + ".mp4");
@@ -62,20 +60,14 @@ public class Play extends Fragment {
 
                     AsyncTaskPlayVideo taskPlayVideo = new AsyncTaskPlayVideo();
                     taskPlayVideo.execute(key, filePath);
-                    //Intent intent = new Intent(root.getContext(), DisplayVideoFile.class);
-                    //root.getContext().startActivity(intent);
+                } else {
+                    Toast.makeText(root.getContext(), "Please, give a key!", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
         return root;
-    }
-
-    public String createFilePath() {
-        ContextWrapper contextWrapper = new ContextWrapper(getActivity().getApplicationContext());
-        File dir = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-        File file = new File(dir, "tiktokvideo" + "mp4");
-        return file.getPath();
     }
 
     private class AsyncTaskPlayVideo extends AsyncTask<String, String, String> {
@@ -84,7 +76,7 @@ public class Play extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             p = new ProgressDialog(Play.this.getContext());
-            p.setMessage("Please wait until we find a server..");
+            p.setMessage("Downloading video. Please wait..");
             p.setIndeterminate(false);
             p.setCancelable(false);
             p.show();
@@ -97,11 +89,6 @@ public class Play extends Fragment {
             String path = strings[1];
 
             String data = keyToPlay.getText().toString().trim() + " " + path;
-
-            // Create a consumer's thread
-            //ThreadInformation c = new ThreadInformation(6, consumer.getNodeId(), consumer.getPort(), consumer.getIp(), null, data);
-            //consumer.setOpinion(c);
-            //new Thread(consumer).start();
 
             consumer.playData(data);
 

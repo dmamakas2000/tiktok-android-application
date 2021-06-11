@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import java.nio.channels.AsynchronousChannelGroup;
 import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.appnode.Consumer;
@@ -40,10 +42,17 @@ public class Register extends Fragment {
         registerButton = root.findViewById(R.id.register_hashtag_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 hashTagToRegister = root.findViewById(R.id.register_hashtag_field);
-                String text = hashTagToRegister.getText().toString().trim();
-                AsyncTaskRegisterHashtags task = new AsyncTaskRegisterHashtags();
-                task.execute(text);
+
+                if (!hashTagToRegister.getText().toString().trim().equals("")) {
+                    String text = hashTagToRegister.getText().toString().trim();
+                    AsyncTaskRegisterHashtags task = new AsyncTaskRegisterHashtags();
+                    task.execute(text);
+                } else {
+                    Toast.makeText(root.getContext(), "Please, give a hashtag!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -79,6 +88,7 @@ public class Register extends Fragment {
         protected void onPostExecute(String hashtag) {
             super.onPostExecute(hashtag);
             p.hide();
+            hashTagToRegister.setText("");
         }
 
     }

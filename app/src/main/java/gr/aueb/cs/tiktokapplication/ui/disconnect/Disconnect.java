@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.appnode.Consumer;
@@ -42,9 +43,15 @@ public class Disconnect extends Fragment {
         disconnectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 hashTagToDisconnect = root.findViewById(R.id.disconnect_hashtag_field);
-                String text = hashTagToDisconnect.getText().toString().trim();
-                AsyncTaskDisconnectHashtags task = new AsyncTaskDisconnectHashtags();
-                task.execute(text);
+
+                if (!hashTagToDisconnect.getText().toString().trim().equals("")) {
+                    String text = hashTagToDisconnect.getText().toString().trim();
+                    AsyncTaskDisconnectHashtags task = new AsyncTaskDisconnectHashtags();
+                    task.execute(text);
+                } else {
+                    Toast.makeText(root.getContext(), "Please, give a hashtag!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -80,6 +87,7 @@ public class Disconnect extends Fragment {
         protected void onPostExecute(String hashtag) {
             super.onPostExecute(hashtag);
             p.hide();
+            hashTagToDisconnect.setText("");
         }
 
     }

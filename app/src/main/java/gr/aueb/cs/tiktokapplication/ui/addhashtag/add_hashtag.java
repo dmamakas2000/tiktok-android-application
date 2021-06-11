@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,9 +40,15 @@ public class add_hashtag extends Fragment {
         addHashtagButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 hashtagField = root.findViewById(R.id.add_hashtag_field);
-                String text = hashtagField.getText().toString().trim();
-                AsyncTaskAddHashtag add = new AsyncTaskAddHashtag();
-                add.execute(text);
+
+                if (!hashtagField.getText().toString().trim().equals("")) {
+                    String text = hashtagField.getText().toString().trim();
+                    AsyncTaskAddHashtag add = new AsyncTaskAddHashtag();
+                    add.execute(text);
+                } else {
+                    Toast.makeText(root.getContext(), "Please, give a hashtag!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -79,6 +86,7 @@ public class add_hashtag extends Fragment {
         protected void onPostExecute(String hashtag) {
             super.onPostExecute(hashtag);
             p.hide();
+            hashtagField.setText("");
         }
 
     } // AsyncTaskAddHashtag

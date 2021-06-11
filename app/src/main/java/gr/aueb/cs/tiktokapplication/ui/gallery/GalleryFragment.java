@@ -21,6 +21,7 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,11 +29,15 @@ import androidx.lifecycle.ViewModelProvider;
 import java.io.File;
 import java.io.InputStream;
 
+import gr.aueb.cs.tiktokapplication.DisplayVideoFile;
+import gr.aueb.cs.tiktokapplication.MainMenu;
 import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.Video;
 import gr.aueb.cs.tiktokapplication.appnode.Consumer;
 import gr.aueb.cs.tiktokapplication.appnode.Publisher;
 import gr.aueb.cs.tiktokapplication.appnode.ThreadInformation;
+import gr.aueb.cs.tiktokapplication.appnode.Value;
+import gr.aueb.cs.tiktokapplication.appnode.VideoFile;
 import gr.aueb.cs.tiktokapplication.dao.ConsumerDAO;
 import gr.aueb.cs.tiktokapplication.dao.PublisherDAO;
 import gr.aueb.cs.tiktokapplication.ui.addhashtag.add_hashtag;
@@ -45,12 +50,13 @@ public class GalleryFragment extends Fragment {
     private EditText hashtagEditText;
     private ProgressDialog p;
     private static Uri videoUri;
+    private static View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         GalleryViewModel galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
 
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        root = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         view = root.findViewById(R.id.videoView3);
 
@@ -76,41 +82,37 @@ public class GalleryFragment extends Fragment {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(view.getContext(), "Upload button clicked!", Toast.LENGTH_LONG).show();
 
                 String hashtagToBePushed = hashtagEditText.getText().toString().trim();
 
-                InputStream s;
-                try {
-                    s = root.getContext().getContentResolver().openInputStream(videoUri);
+                if (!hashtagToBePushed.equals("")) {
+                    InputStream s;
+                    try {
+                        s = root.getContext().getContentResolver().openInputStream(videoUri);
+
+                        String[] mediaColumns = {MediaStore.Video.Media.SIZE};
+                        Cursor cursor = getContext().getContentResolver().query(videoUri, mediaColumns, null, null, null);
+                        cursor.moveToFirst();
+                        int sizeColInd = cursor.getColumnIndex(mediaColumns[0]);
+                        long fileSize = cursor.getLong(sizeColInd);
+                        cursor.close();
+                        System.out.println(fileSize);
 
 
-                    // System.out.println("Stream is not null!!!");
-                    // String filepath = Environment.getExternalStorageDirectory() + videoUri.getPath();
-                    // File file = new File(videoUri.getPath());
-                    // long length = file.length();
-                    // System.out.println(length);
-
-                    String[] mediaColumns = {MediaStore.Video.Media.SIZE};
-                    Cursor cursor = getContext().getContentResolver().query(videoUri, mediaColumns, null, null, null);
-                    cursor.moveToFirst();
-                    int sizeColInd = cursor.getColumnIndex(mediaColumns[0]);
-                    long fileSize = cursor.getLong(sizeColInd);
-                    cursor.close();
-                    System.out.println(fileSize);
+                        Publisher p = PublisherDAO.getPublisher();
+                        p.setAndroidVideoInputStream(s);
+                        p.setAndroidVideoBytes(fileSize);
 
 
-                    Publisher p = PublisherDAO.getPublisher();
-                    p.setAndroidVideoInputStream(s);
-                    p.setAndroidVideoBytes(fileSize);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    AsyncTaskUploadVideo uploadVideo = new AsyncTaskUploadVideo();
+                    uploadVideo.execute(hashtagToBePushed);
+                } else {
+                    Toast.makeText(root.getContext(), "You should give a hashtag to this video!", Toast.LENGTH_SHORT).show();
                 }
-
-                AsyncTaskUploadVideo uploadVideo = new AsyncTaskUploadVideo();
-                uploadVideo.execute(hashtagToBePushed);
             }
 
         });
@@ -141,7 +143,7 @@ public class GalleryFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             p = new ProgressDialog(GalleryFragment.this.getContext());
-            p.setMessage("Please wait until we find a server..");
+            p.setMessage("Uploading video. Please wait..");
             p.setIndeterminate(false);
             p.setCancelable(false);
             p.show();
@@ -151,14 +153,11 @@ public class GalleryFragment extends Fragment {
         protected String doInBackground(String... strings) {
             Publisher publisher = PublisherDAO.getPublisher();
 
-            // The keys we want
-            String key = strings[0] + " " + videoUri.getPath();
+            VideoFile videoValueFile = new VideoFile();
+            videoValueFile.setVideoName(videoUri.getPath());
+            Value videoValue = new Value(videoValueFile);
 
-            System.out.println("The key is: " + key);
-
-            ThreadInformation thread = new ThreadInformation(3, publisher.getNodeId(), publisher.getPort(), publisher.getIp(), publisher.getChannelname(), key);
-            publisher.setOption(thread);
-            new Thread(publisher).start();
+            publisher.push(strings[0], videoValue);
 
             return "";
         }
@@ -166,8 +165,10 @@ public class GalleryFragment extends Fragment {
         @Override
         protected void onPostExecute(String hashtag) {
             super.onPostExecute(hashtag);
-
             p.hide();
+            Toast.makeText(root.getContext(), "Uploaded!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(root.getContext(), MainMenu.class);
+            root.getContext().startActivity(intent);
         }
 
     }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.appnode.Publisher;
@@ -38,10 +39,16 @@ public class RemoveHashtag extends Fragment {
         removeHashtagButton = root.findViewById(R.id.remove_hashtag_button);
         removeHashtagButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 hashTagField = root.findViewById(R.id.remove_hashtag_field);
-                String text = hashTagField.getText().toString().trim();
-                AsyncTaskRemoveHashtag remove = new AsyncTaskRemoveHashtag();
-                remove.execute(text);
+                if (!hashTagField.getText().toString().trim().equals("")) {
+                    String text = hashTagField.getText().toString().trim();
+                    AsyncTaskRemoveHashtag remove = new AsyncTaskRemoveHashtag();
+                    remove.execute(text);
+                } else {
+                    Toast.makeText(root.getContext(), "Please, give a hashtag!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -79,6 +86,7 @@ public class RemoveHashtag extends Fragment {
         protected void onPostExecute(String hashtag) {
             super.onPostExecute(hashtag);
             p.hide();
+            hashTagField.setText("");
         }
 
     }
