@@ -1,4 +1,4 @@
-package gr.aueb.cs.tiktokapplication.video;
+package gr.aueb.cs.tiktokapplication.appnode;
 
 import java.io.Serializable;
 import java.util.ArrayList;

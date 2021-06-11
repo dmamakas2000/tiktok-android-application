@@ -1,4 +1,4 @@
-package gr.aueb.cs.tiktokapplication.broker;
+package gr.aueb.cs.tiktokapplication.appnode;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -16,13 +16,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Queue;
-
-import gr.aueb.cs.tiktokapplication.appnode.Consumer;
-import gr.aueb.cs.tiktokapplication.appnode.Message;
-import gr.aueb.cs.tiktokapplication.appnode.Node;
-import gr.aueb.cs.tiktokapplication.appnode.Publisher;
-import gr.aueb.cs.tiktokapplication.video.ChannelName;
-import gr.aueb.cs.tiktokapplication.video.Value;
 
 public class Broker implements Node, BrokerInterface {
 

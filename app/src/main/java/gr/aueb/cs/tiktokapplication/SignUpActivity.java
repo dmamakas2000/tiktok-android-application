@@ -9,11 +9,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.Objects;
 
-import gr.aueb.cs.tiktokapplication.appnode.Publisher;
-import gr.aueb.cs.tiktokapplication.video.ChannelName;
+import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
 

@@ -1,0 +1,1 @@
+java -cp ./build gr.aueb.cs.tiktokapplication.appnode.Broker

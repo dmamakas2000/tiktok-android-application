@@ -15,9 +15,6 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Scanner;
-import gr.aueb.cs.tiktokapplication.broker.Broker;
-import gr.aueb.cs.tiktokapplication.video.Value;
 
 public class Consumer extends Thread implements Node, Serializable, ConsumerInterface  {
 	
@@ -384,9 +381,14 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 	public void playData(String key) {
 				
 		ArrayList<Value> chunksToPlay = new ArrayList<Value>();
-		
-		Message responsibleBroker = this.hashTopic(key);
-		
+
+		String[] splitted = key.split("\\s+", 2);
+
+		String keyToWork = splitted[0];
+		String path = splitted[1];
+
+		Message responsibleBroker = this.hashTopic(keyToWork);
+
 		this.connect(responsibleBroker.getIpAddres(), responsibleBroker.getPort());
 		
 		try {
@@ -394,7 +396,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 			OutputStream os = this.getSocket().getOutputStream();
 	        ObjectOutputStream oos = new ObjectOutputStream(os);
 	        oos.writeObject("Consume");
-	        oos.writeObject(key);
+	        oos.writeObject(keyToWork);
 	        
 	        // And now, just start to retrieve video information -chunks- from broker	        
 	        InputStream is = this.getSocket().getInputStream();
@@ -410,7 +412,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 	        // Second part is considered to be the number of chunks to expect
 	        
 	        int numberOfChunks = Integer.parseInt(splited[1]);
-	        
+	        System.out.println(numberOfChunks);
 	        if (splited[0].equals("SV")) {
 	        		        	
 	        	// Start reading the chunks and placing them inside the ArrayList
@@ -430,9 +432,13 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 	        		}
 	        		
 	        	}
-	        	
+	        	System.out.println("Writing video..");
 	        	// Create the video file
-	        	FileOutputStream videoFile = new FileOutputStream("downloaded_video.mp4");
+
+				File file = new File(path);
+				//file.createNewFile();
+
+	        	FileOutputStream videoFile = new FileOutputStream(file);
 	        	
 	        	// Convert Byte ArrayList into byte[] array
 	        	byte[] videoArray = new byte[video.size()];
@@ -440,12 +446,11 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 	        	for (int k=0; k<videoArray.length; k++) {
 	        		videoArray[k] = video.get(k);
 	        	}
-	        	
+				System.out.println(videoArray.length);
 	        	// Write bytes inside video file
-	        	videoFile.write(videoArray);
-	        	
-	        	// Finally, lets play our video!
-	        	// Desktop.getDesktop().open(new File("downloaded_video.mp4"));
+
+				videoFile.write(videoArray);
+	        	System.out.println("Video written into " + path);
 
 	        	// Close the file and exit
 	        	videoFile.close();

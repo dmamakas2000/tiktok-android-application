@@ -53,6 +53,7 @@ public class Capture extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 1 && resultCode == 1) {
             Uri videoUri = intent.getData();
+            System.out.println(videoUri.getPath());
             Intent intent1 = new Intent(this.getContext(), Video.class);
             intent1.putExtra("URI", videoUri);
         }

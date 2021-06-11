@@ -2,7 +2,6 @@ package gr.aueb.cs.tiktokapplication.appnode;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import gr.aueb.cs.tiktokapplication.video.ChannelName;
 
 public class AppNode {
 	

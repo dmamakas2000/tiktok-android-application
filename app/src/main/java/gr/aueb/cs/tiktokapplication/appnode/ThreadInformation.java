@@ -1,7 +1,5 @@
 package gr.aueb.cs.tiktokapplication.appnode;
 
-import gr.aueb.cs.tiktokapplication.video.ChannelName;
-
 public class ThreadInformation {
 	
 	// -------------------------- Attributes -------------------------- 

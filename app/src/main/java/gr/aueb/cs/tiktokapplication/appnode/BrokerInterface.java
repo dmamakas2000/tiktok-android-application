@@ -1,4 +1,4 @@
-package gr.aueb.cs.tiktokapplication.broker;// This is a broker interface - Represents a general Broker
+package gr.aueb.cs.tiktokapplication.appnode;// This is a broker interface - Represents a general Broker
 
 import gr.aueb.cs.tiktokapplication.appnode.Consumer;
 import gr.aueb.cs.tiktokapplication.appnode.Node;

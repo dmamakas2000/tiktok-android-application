@@ -18,7 +18,7 @@ import gr.aueb.cs.tiktokapplication.appnode.Publisher;
 import gr.aueb.cs.tiktokapplication.dao.ConsumerDAO;
 import gr.aueb.cs.tiktokapplication.dao.PublisherDAO;
 import gr.aueb.cs.tiktokapplication.ui.addhashtag.add_hashtag;
-import gr.aueb.cs.tiktokapplication.video.ChannelName;
+import gr.aueb.cs.tiktokapplication.appnode.ChannelName;
 
 public class Configurations extends AppCompatActivity {
 

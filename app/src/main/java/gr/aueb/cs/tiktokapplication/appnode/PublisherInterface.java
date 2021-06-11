@@ -1,8 +1,6 @@
 package gr.aueb.cs.tiktokapplication.appnode;// This is a publisher interface - Represents a general Publisher
 
 import java.util.ArrayList;
-import gr.aueb.cs.tiktokapplication.broker.Broker;
-import gr.aueb.cs.tiktokapplication.video.Value;
 
 public interface PublisherInterface extends Node {
 	

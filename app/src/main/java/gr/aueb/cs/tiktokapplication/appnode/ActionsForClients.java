@@ -1,14 +1,9 @@
-package gr.aueb.cs.tiktokapplication.broker;
+package gr.aueb.cs.tiktokapplication.appnode;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
-
-import gr.aueb.cs.tiktokapplication.appnode.Message;
-import gr.aueb.cs.tiktokapplication.appnode.Publisher;
-import gr.aueb.cs.tiktokapplication.video.ChannelName;
-import gr.aueb.cs.tiktokapplication.video.Value;
 
 public class ActionsForClients extends Thread {
 	
@@ -173,7 +168,7 @@ public class ActionsForClients extends Thread {
                 		Value v = (Value) in.readObject();
                 		b.getBrokerQueue().add(v);
                 	}
-            		
+            		System.out.println("Received full video! " + b.getBrokerQueue().size() + " chunks");
             	} 
         	}
 		} catch (Exception e) {
