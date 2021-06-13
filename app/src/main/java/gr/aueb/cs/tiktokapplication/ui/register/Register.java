@@ -25,14 +25,9 @@ import gr.aueb.cs.tiktokapplication.ui.addhashtag.add_hashtag;
 
 public class Register extends Fragment {
 
-    private RegisterViewModel mViewModel;
     private Button registerButton;
     private EditText hashTagToRegister;
     private ProgressDialog p;
-
-    public static Register newInstance() {
-        return new Register();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,  @Nullable Bundle savedInstanceState) {

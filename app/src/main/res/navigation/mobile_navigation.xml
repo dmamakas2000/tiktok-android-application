@@ -18,12 +18,6 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="gr.aueb.cs.tiktokapplication.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
         android:id="@+id/nav_add_hashtag"
         android:name="gr.aueb.cs.tiktokapplication.ui.addhashtag.add_hashtag"
         android:label="@string/menu_add_hashtag"
@@ -34,12 +28,6 @@
         android:name="gr.aueb.cs.tiktokapplication.ui.removehashtag.RemoveHashtag"
         android:label="@string/menu_remove_hashtag"
         tools:layout="@layout/fragment_remove_hashtag" />
-
-    <fragment
-        android:id="@+id/nav_upload"
-        android:name="gr.aueb.cs.tiktokapplication.ui.upload.Upload"
-        android:label="@string/menu_upload"
-        tools:layout="@layout/fragment_upload" />
 
     <fragment
         android:id="@+id/nav_register"

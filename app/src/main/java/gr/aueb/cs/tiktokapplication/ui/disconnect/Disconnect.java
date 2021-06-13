@@ -25,14 +25,9 @@ import gr.aueb.cs.tiktokapplication.ui.register.Register;
 
 public class Disconnect extends Fragment {
 
-    private DisconnectViewModel mViewModel;
     private Button disconnectButton;
     private EditText hashTagToDisconnect;
     private ProgressDialog p;
-
-    public static Disconnect newInstance() {
-        return new Disconnect();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,  @Nullable Bundle savedInstanceState) {
@@ -86,6 +81,5 @@ public class Disconnect extends Fragment {
         }
 
     }
-
 
 }

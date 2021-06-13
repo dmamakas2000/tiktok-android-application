@@ -12,24 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-
 import gr.aueb.cs.tiktokapplication.dao.PublisherDAO;
 import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.appnode.Publisher;
-import gr.aueb.cs.tiktokapplication.appnode.ThreadInformation;
 
 public class add_hashtag extends Fragment {
 
-    private AddHashtagViewModel mViewModel;
     private EditText hashtagField;
     private Button addHashtagButton;
     private ProgressDialog p;
-
-    public static add_hashtag newInstance() {
-        return new add_hashtag();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

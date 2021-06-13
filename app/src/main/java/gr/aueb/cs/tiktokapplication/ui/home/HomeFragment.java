@@ -16,12 +16,8 @@ import gr.aueb.cs.tiktokapplication.R;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         return root;

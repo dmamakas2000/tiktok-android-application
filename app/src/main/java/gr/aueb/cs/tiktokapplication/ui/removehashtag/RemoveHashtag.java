@@ -22,14 +22,9 @@ import gr.aueb.cs.tiktokapplication.ui.addhashtag.add_hashtag;
 
 public class RemoveHashtag extends Fragment {
 
-    private RemoveHashtagViewModel mViewModel;
     private Button removeHashtagButton;
     private ProgressDialog p;
     private EditText hashTagField;
-
-    public static RemoveHashtag newInstance() {
-        return new RemoveHashtag();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,4 +78,5 @@ public class RemoveHashtag extends Fragment {
         }
 
     }
+
 }

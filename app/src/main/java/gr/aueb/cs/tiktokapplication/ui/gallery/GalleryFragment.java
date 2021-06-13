@@ -14,13 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
 import java.io.InputStream;
-
 import gr.aueb.cs.tiktokapplication.utils.MainMenu;
 import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.appnode.Publisher;
@@ -38,8 +35,6 @@ public class GalleryFragment extends Fragment {
     private static View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        GalleryViewModel galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
 
         root = inflater.inflate(R.layout.fragment_gallery, container, false);
 

@@ -27,15 +27,10 @@ import gr.aueb.cs.tiktokapplication.dao.ConsumerDAO;
 
 public class Play extends Fragment {
 
-    private PlayViewModel mViewModel;
     private EditText keyToPlay;
     private Button playVideoButton;
     private ProgressDialog p;
     public static View root;
-
-    public static Play newInstance() {
-        return new Play();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -104,4 +99,5 @@ public class Play extends Fragment {
         }
 
     }
+
 }

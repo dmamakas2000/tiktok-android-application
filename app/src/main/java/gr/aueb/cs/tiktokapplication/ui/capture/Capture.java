@@ -3,27 +3,18 @@ package gr.aueb.cs.tiktokapplication.ui.capture;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.utils.Video;
 
 public class Capture extends Fragment {
-
-    private CaptureViewModel mViewModel;
-
-    public static Capture newInstance() {
-        return new Capture();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,7 +37,6 @@ public class Capture extends Fragment {
 
 
         return root;
-       // return inflater.inflate(R.layout.fragment_capture, container, false);
     }
 
     @Override
@@ -58,6 +48,5 @@ public class Capture extends Fragment {
             intent1.putExtra("URI", videoUri);
         }
     }
-
 
 }
