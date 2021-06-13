@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import gr.aueb.cs.tiktokapplication.R;
-import gr.aueb.cs.tiktokapplication.Video;
+import gr.aueb.cs.tiktokapplication.utils.Video;
 
 public class Capture extends Fragment {
 

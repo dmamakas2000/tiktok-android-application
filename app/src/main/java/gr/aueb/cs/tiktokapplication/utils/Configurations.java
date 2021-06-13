@@ -1,4 +1,4 @@
-package gr.aueb.cs.tiktokapplication;
+package gr.aueb.cs.tiktokapplication.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.appnode.Consumer;
 import gr.aueb.cs.tiktokapplication.appnode.Publisher;
 import gr.aueb.cs.tiktokapplication.dao.ConsumerDAO;

@@ -1,8 +1,7 @@
-package gr.aueb.cs.tiktokapplication;
+package gr.aueb.cs.tiktokapplication.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +13,7 @@ import android.widget.VideoView;
 
 import java.io.File;
 
-import gr.aueb.cs.tiktokapplication.ui.home.HomeFragment;
+import gr.aueb.cs.tiktokapplication.R;
 
 public class DisplayVideoFile extends AppCompatActivity {
 

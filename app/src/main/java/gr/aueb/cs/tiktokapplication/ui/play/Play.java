@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import gr.aueb.cs.tiktokapplication.DisplayVideoFile;
+import gr.aueb.cs.tiktokapplication.utils.DisplayVideoFile;
 import gr.aueb.cs.tiktokapplication.R;
 import gr.aueb.cs.tiktokapplication.appnode.Consumer;
 import gr.aueb.cs.tiktokapplication.dao.ConsumerDAO;

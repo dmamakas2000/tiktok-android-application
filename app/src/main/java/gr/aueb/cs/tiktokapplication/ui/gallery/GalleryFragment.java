@@ -6,42 +6,27 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.io.File;
 import java.io.InputStream;
 
-import gr.aueb.cs.tiktokapplication.DisplayVideoFile;
-import gr.aueb.cs.tiktokapplication.MainMenu;
+import gr.aueb.cs.tiktokapplication.utils.MainMenu;
 import gr.aueb.cs.tiktokapplication.R;
-import gr.aueb.cs.tiktokapplication.Video;
-import gr.aueb.cs.tiktokapplication.appnode.Consumer;
 import gr.aueb.cs.tiktokapplication.appnode.Publisher;
-import gr.aueb.cs.tiktokapplication.appnode.ThreadInformation;
 import gr.aueb.cs.tiktokapplication.appnode.Value;
 import gr.aueb.cs.tiktokapplication.appnode.VideoFile;
-import gr.aueb.cs.tiktokapplication.dao.ConsumerDAO;
 import gr.aueb.cs.tiktokapplication.dao.PublisherDAO;
-import gr.aueb.cs.tiktokapplication.ui.addhashtag.add_hashtag;
-import gr.aueb.cs.tiktokapplication.ui.register.Register;
 
 public class GalleryFragment extends Fragment {
 

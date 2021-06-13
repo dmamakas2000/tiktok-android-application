@@ -72,13 +72,7 @@ public class add_hashtag extends Fragment {
 
             // Add the hashtag to the channel
             Publisher p = PublisherDAO.getPublisher();      // Get publisher's instance
-
-            ThreadInformation threadInformation = new ThreadInformation(1, (int) p.getId(), p.getPort(), p.getIp(), p.getChannelname(), strings[0]);
-            p.setOption(threadInformation);
-
-            // Start a new thread
-            new Thread(p).start();
-
+            p.addHashTag(strings[0]);
             return "";
         }
 

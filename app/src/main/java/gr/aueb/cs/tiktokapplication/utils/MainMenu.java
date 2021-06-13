@@ -1,4 +1,4 @@
-package gr.aueb.cs.tiktokapplication;
+package gr.aueb.cs.tiktokapplication.utils;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +15,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import gr.aueb.cs.tiktokapplication.R;
 
 public class MainMenu extends AppCompatActivity {
 

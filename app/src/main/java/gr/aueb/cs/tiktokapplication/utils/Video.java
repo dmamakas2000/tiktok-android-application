@@ -1,10 +1,12 @@
-package gr.aueb.cs.tiktokapplication;
+package gr.aueb.cs.tiktokapplication.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.VideoView;
+
+import gr.aueb.cs.tiktokapplication.R;
 
 public class Video extends AppCompatActivity {
 

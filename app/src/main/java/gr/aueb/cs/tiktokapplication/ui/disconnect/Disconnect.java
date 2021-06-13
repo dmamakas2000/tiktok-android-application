@@ -74,12 +74,7 @@ public class Disconnect extends Fragment {
         protected String doInBackground(String... strings) {
 
             Consumer consumer = ConsumerDAO.getConsumer();
-
-            ThreadInformation c = new ThreadInformation(5, consumer.getNodeId(), consumer.getPort(), consumer.getIp(), null, strings[0]);
-            consumer.setOpinion(c);
-
-            new Thread(consumer).start();
-
+            consumer.disconnect(strings[0]);
             return "";
         }
 

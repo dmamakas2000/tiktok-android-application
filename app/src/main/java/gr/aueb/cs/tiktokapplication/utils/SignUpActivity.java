@@ -1,4 +1,4 @@
-package gr.aueb.cs.tiktokapplication;
+package gr.aueb.cs.tiktokapplication.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.Objects;
+
+import gr.aueb.cs.tiktokapplication.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

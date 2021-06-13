@@ -1,4 +1,4 @@
-package gr.aueb.cs.tiktokapplication;
+package gr.aueb.cs.tiktokapplication.utils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import gr.aueb.cs.tiktokapplication.R;
 
 public class ConfigurationsAboutLocalServer extends AppCompatActivity {
 

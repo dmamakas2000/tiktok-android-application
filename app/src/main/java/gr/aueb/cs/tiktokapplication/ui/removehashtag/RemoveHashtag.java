@@ -69,16 +69,9 @@ public class RemoveHashtag extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
-
             // Remove the hashtag from the channel
             Publisher p = PublisherDAO.getPublisher();      // Get publisher's instance
-
-            ThreadInformation threadInformation = new ThreadInformation(2, (int) p.getId(), p.getPort(), p.getIp(), p.getChannelname(), strings[0]);
-            p.setOption(threadInformation);
-
-            // Start a new thread
-            new Thread(p).start();
-
+            p.removeHashTag(strings[0]);
             return "";
         }
 

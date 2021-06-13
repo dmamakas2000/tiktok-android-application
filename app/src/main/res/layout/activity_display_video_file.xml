@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayVideoFile">
+    tools:context=".utils.DisplayVideoFile">
 
     <VideoView
         android:id="@+id/display_video_file_view"
