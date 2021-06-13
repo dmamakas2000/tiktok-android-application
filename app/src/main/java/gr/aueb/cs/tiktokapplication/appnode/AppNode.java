@@ -53,12 +53,12 @@ public class AppNode {
 			
 			// Initialize publisher and retrieve information about brokers
 			publisher.init(pubId, pubIp, pubPort, channel);
-			publisher.retrieveInformation();
+			//publisher.retrieveInformation();
 			
 			// Create a new Consumer object and initialize it
 			Consumer consumer = new Consumer();
 			consumer.init(subId, subIp, subPort);
-			consumer.retrieveInformation();
+			//consumer.retrieveInformation();
 			
 			while (true) {
 				

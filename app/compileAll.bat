@@ -1,0 +1,1 @@
+javac -d ./build ./src/main/java/gr/aueb/cs/tiktokapplication/appnode/*.java ./src/main/java/gr/aueb/cs/tiktokapplication/dao/*.java

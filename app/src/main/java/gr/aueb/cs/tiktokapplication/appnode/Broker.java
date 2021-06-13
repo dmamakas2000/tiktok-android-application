@@ -17,6 +17,8 @@ import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import gr.aueb.cs.tiktokapplication.dao.BrokerDAO;
+
 public class Broker implements Node, BrokerInterface {
 
 	// ---------------------------------------- Attributes ----------------------------------------
@@ -39,7 +41,8 @@ public class Broker implements Node, BrokerInterface {
     private String keys;                    // Broker's keys 
 	
     private Queue<Value> brokerQueue = new LinkedList<>();   // Broker's queue used to forward chunks into consumers
-    
+
+	private Broker instance = this;
     // ---------------------------------------- Constructor ----------------------------------------
     
     public Broker(int nodeNumber) {
@@ -120,7 +123,11 @@ public class Broker implements Node, BrokerInterface {
     	
     	return chunks;
     }
-    
+
+    public Broker getInstance() {
+    	return this.instance;
+	}
+
     // ---------------------------------------- Setters ----------------------------------------
     
     public void setBrokerId(int brokerId) {
@@ -491,8 +498,7 @@ public class Broker implements Node, BrokerInterface {
 			
 			// Initializing broker
 			broker.init(id, ip, port);
-				
-			// Writing Broker's information into a file
+
 			try {
 				
 				FileWriter brokerWriter = new FileWriter(broker.getBrokerId() + "broker.txt");
@@ -518,6 +524,7 @@ public class Broker implements Node, BrokerInterface {
 			}
 		} catch (Exception e) {
 			System.out.println("An exception occured. Please check out your inputs and try again. \n\n");
+			e.printStackTrace();
 		}	
 		
 	}

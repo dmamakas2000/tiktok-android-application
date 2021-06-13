@@ -16,6 +16,8 @@ import java.net.Socket;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 
+import gr.aueb.cs.tiktokapplication.dao.BrokerDAO;
+
 public class Consumer extends Thread implements Node, Serializable, ConsumerInterface  {
 	
 	// -------------------------- Attributes --------------------------
@@ -168,9 +170,32 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 	
 	// -------------------------- Some Publisher's methods used inside Consumer class --------------------------
 	
-	public void retrieveInformation() {
+	public void retrieveInformation(String serverAddress) {
 		try {
 
+			/*
+			ArrayList<Broker> brokers = BrokerDAO.INSTANCE.getBrokers();
+
+			for (Broker b: brokers) {
+				this.brokers.add(new Message(b.getIpBroker(), b.getPortBroker()));
+			}
+			 */
+
+			this.connect(serverAddress, 5555);
+
+			InputStream is = this.getSocket().getInputStream();
+			ObjectInputStream ois = new ObjectInputStream(is);
+
+			String ip = (String) ois.readObject();
+			ArrayList<Integer> ports = (ArrayList<Integer>) ois.readObject();
+
+			for (int port: ports) {
+				this.brokers.add(new Message(ip, port));
+			}
+
+			this.disconnect();
+
+			/*
 			String ipB1 = "192.168.1.200";
 			String ipB2 = "192.168.1.200";
 			String ipB3 = "192.168.1.200";
@@ -186,6 +211,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 			this.brokers.add(b1);
 			this.brokers.add(b2);
 			this.brokers.add(b3);
+			*/
 
 		} catch (Exception e) {
 			e.printStackTrace();

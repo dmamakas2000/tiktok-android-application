@@ -16,18 +16,17 @@
         android:required="true" />
 
     <application
-        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TikTokApplication">
-
-        <activity android:name=".DisplayVideoFile"
+        <activity android:name=".ConfigurationsAboutLocalServer"></activity>
+        <activity
+            android:name=".DisplayVideoFile"
             android:exported="true" />
-
         <activity android:name=".Video" />
-
         <activity android:name=".Configurations" />
         <activity
             android:name=".MainMenu"

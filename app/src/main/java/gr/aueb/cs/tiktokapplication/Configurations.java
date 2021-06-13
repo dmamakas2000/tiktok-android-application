@@ -3,6 +3,7 @@ package gr.aueb.cs.tiktokapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -36,7 +37,7 @@ public class Configurations extends AppCompatActivity {
         Intent intent = getIntent();
 
         String channelName = intent.getStringExtra("CHANNEL_NAME");
-
+        String ipServer = intent.getStringExtra("SERVER_IP");
 
         // Make the button respond properly
         Button button1 = (Button) findViewById(R.id.done);
@@ -78,8 +79,11 @@ public class Configurations extends AppCompatActivity {
                 // Add Consumer on existing database
                 ConsumerDAO daoConsumer = new ConsumerDAO(consumer);
 
-                publisher.retrieveInformation();
-                consumer.retrieveInformation();
+                //publisher.retrieveInformation();
+                //consumer.retrieveInformation();
+
+                AsyncTaskRetrieveInformation asyncTaskRetrieveInformation = new AsyncTaskRetrieveInformation();
+                asyncTaskRetrieveInformation.execute(ipServer);
 
                 ArrayList<String> info = new ArrayList<>();
 
@@ -98,6 +102,20 @@ public class Configurations extends AppCompatActivity {
             }
 
         });
+    }
 
+    private class AsyncTaskRetrieveInformation extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            Consumer consumer = ConsumerDAO.getConsumer();
+            consumer.retrieveInformation(strings[0]);
+
+            Publisher publisher = PublisherDAO.getPublisher();
+            publisher.retrieveInformation(strings[0]);
+
+            return "";
+        }
     }
 }

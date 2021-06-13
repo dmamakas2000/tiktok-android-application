@@ -43,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
                     toast.show();
                 } else {
 
-                    Intent intent = new Intent(view.getContext(), Configurations.class);
+                    Intent intent = new Intent(view.getContext(), ConfigurationsAboutLocalServer.class);
 
                     intent.putExtra("CHANNEL_NAME", channelName);
 

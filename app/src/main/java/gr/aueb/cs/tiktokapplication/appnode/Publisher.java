@@ -3,6 +3,7 @@ package gr.aueb.cs.tiktokapplication.appnode;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -10,6 +11,8 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+
+import gr.aueb.cs.tiktokapplication.dao.BrokerDAO;
 
 
 public class Publisher extends Thread implements Node, PublisherInterface {
@@ -229,16 +232,46 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 		}
 	}
 
-	public void retrieveInformation() {
+	public void retrieveInformation(String serverIp) {
 		try {
 
+			/*
+			System.out.println("Got in retrieve information ");
+			System.out.println(BrokerDAO.INSTANCE.getBrokers().size());
+
+			ArrayList<Broker> brokers = BrokerDAO.INSTANCE.getBrokers();
+
+			for (Broker b: brokers) {
+				this.brokers.add(new Message(b.getIpBroker(), b.getPortBroker()));
+			}
+
+			for (Message bb: this.getBrokers()) {
+				System.out.println("IP:--> " + bb.getIpAddres());
+				System.out.println("PORT:--> " + bb.getPort());
+			}
+			*/
+
+			this.connect(serverIp, 5555);
+
+			InputStream is = this.getSocket().getInputStream();
+			ObjectInputStream ois = new ObjectInputStream(is);
+
+			String ip = (String) ois.readObject();
+			ArrayList<Integer> ports = (ArrayList<Integer>) ois.readObject();
+
+			for (int port: ports) {
+				this.brokers.add(new Message(ip, port));
+			}
+
+			this.disconnect();
+
+			/*
 			String ipB1 = "192.168.1.200";
 			String ipB2 = "192.168.1.200";
 			String ipB3 = "192.168.1.200";
 			int pB1 = 3030;
 			int pB2 = 4040;
 			int pB3 = 5050;
-
 
 			Message b1 = new Message(ipB1, pB1);
 			Message b2 = new Message(ipB2, pB2);
@@ -247,7 +280,7 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 			this.brokers.add(b1);
 			this.brokers.add(b2);
 			this.brokers.add(b3);
-
+			*/
 
 		} catch (Exception e) {
 			e.printStackTrace();
