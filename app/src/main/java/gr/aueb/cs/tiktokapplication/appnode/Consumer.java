@@ -351,7 +351,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 	
 	// -------------------------- Consumer's Methods --------------------------
 	
-	public void register(String key) {
+	public synchronized void register(String key) {
 		
 		
 		Message brokerToRegister = this.hashTopic(key);
@@ -379,7 +379,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 		
 	}
 
-	public void disconnect(String key) {
+	public synchronized void disconnect(String key) {
 		
 		Message brokerToRegister = this.hashTopic(key);
 		
@@ -404,7 +404,7 @@ public class Consumer extends Thread implements Node, Serializable, ConsumerInte
 		
 	}
 
-	public void playData(String key) {
+	public synchronized void playData(String key) {
 				
 		ArrayList<Value> chunksToPlay = new ArrayList<Value>();
 

@@ -289,7 +289,7 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 	
 	// --------------------------- Publisher's Methods ---------------------------
 	
-	public void addHashTag(String hashtag) {
+	public synchronized void addHashTag(String hashtag) {
 		
 		// Adds the new hash-tag if it doesn't exist in the channels hash-tags already
 		
@@ -308,7 +308,7 @@ public class Publisher extends Thread implements Node, PublisherInterface {
      
 	}
 
-	public void removeHashTag(String hashtag) {
+	public synchronized void removeHashTag(String hashtag) {
 		
 		// Removes a hash-tag if it doesn't exist in the channels hash-tags already
 
@@ -469,7 +469,7 @@ public class Publisher extends Thread implements Node, PublisherInterface {
 		return this.getBrokers().get(broker-1);
 	}
 
-	public void push(String key, Value video) {
+	public synchronized void push(String key, Value video) {
 		
 		// First, we need to hash the video
 		

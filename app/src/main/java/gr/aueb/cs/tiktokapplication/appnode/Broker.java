@@ -447,25 +447,10 @@ public class Broker implements Node, BrokerInterface {
 	}
 
 	public void filterConsumers(String key) {
-		
-		for (Publisher p:registeredPublishers) {
-			
-			// Publisher's channel-name 
-			ChannelName name=p.getChannelname();
-			
-			// Get the hash-map of the channel
-			HashMap<String,ArrayList<Value>> userVideoFiles= name.getUserVideoFilesMap();		
-			
-			// KeySet iterates through the keys (here, hash-tags) only
-			Iterator <String>it=userVideoFiles.keySet().iterator();	
-			while (it.hasNext()) { 		
-				
-				String h=it.next();				// Get iterator's key
-				if (h==key) {					// Channel's key equals to the given one
-					it.remove();				// Delete publisher's videos
-					
-				}
-			}	
+		for (Value value: this.getBrokerQueue()) {
+			if (!value.getVideoFile().getAssociatedHashtags().contains(key)) {
+				this.getBrokerQueue().remove(value);
+			}
 		}
 	}
 

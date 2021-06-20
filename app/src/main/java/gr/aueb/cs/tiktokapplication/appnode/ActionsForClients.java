@@ -29,11 +29,12 @@ public class ActionsForClients extends Thread {
 		}
 	}
 
-	public void pull(String key) {
+	public synchronized void pull(String key) {
 		
 		try {
 			
-			
+			this.b.filterConsumers(key);
+
 			if (key.startsWith("#")) {
 				
 				// Means that user typed a hash-tag
