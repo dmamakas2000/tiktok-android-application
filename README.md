@@ -62,17 +62,22 @@ cd tiktok-android-app
 
 ## Directory Structure
 ```
-tiktok-android-app/  
-│  
-├── app/  
-│   ├── src/  
-│   │   ├── main/  
-│   │   │   ├── java/       # Core application logic  
-│   │   │   ├── res/        # Layouts, drawables, and other resources  
-│   │   │   └── AndroidManifest.xml  # App configuration  
-│  
-├── README.md               # Project documentation  
-└── build/                  # Build outputs  
+tiktok-android-app/
+│
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/               # Core application logic (Java source code)
+│   │   │   ├── res/                # Android resources (layouts, drawables, etc.)
+│   │   │   └── AndroidManifest.xml # Application configuration
+│   │   └── test/                   # Unit tests
+│   │
+│   └── build.gradle                # App-specific Gradle build configuration
+│
+├── gradle/                         # Gradle wrapper files
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
 ```
 
 ## License
