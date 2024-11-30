@@ -8,7 +8,7 @@
 <br>
 
 ## About
-This repository contains the second phase of the TikTok Java App project, transitioning from the foundational framework developed in Part 1 to an Android application. The goal is to implement a fully functional Android app that allows users to browse, upload, and play videos in real time while leveraging the framework and algorithms developed earlier. This phase focuses on integrating video streaming and playback functionalities, enabling seamless content delivery from creators to subscribers on Android devices.
+This repository contains the second phase of the TikTok Java App project, transitioning from the foundational framework developed in **[Part 1](https://github.com/dmamakas2000/tiktok-java-app/)** to an Android application. The goal is to implement a fully functional Android app that allows users to browse, upload, and play videos in real time while leveraging the framework and algorithms developed earlier. This phase focuses on integrating video streaming and playback functionalities, enabling seamless content delivery from creators to subscribers on Android devices.
 
 ## Features
 **Real-Time Video Playback:**
